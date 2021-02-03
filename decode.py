@@ -10,10 +10,9 @@ def do(base_table, matrix):
     Returns:
         [string]: [decoded string]
     """
-
+    # print(fibonacci(34))
     # find the Q-matrix for the problem
     q_matrix = calculateQMatrix(matrix)
-
     # calculate the E1 matrix
     first_element_matrix = calculateFirstElementMatrix(q_matrix, matrix)
 
@@ -51,15 +50,18 @@ def calculateQMatrix(matrix):
     else:
         n = len(matrix)
 
+    solved_fibonacci = {}
+    fibonacci(n+1, solved_fibonacci)
+
     # create and fill the matrix with zeros
     q_matrix = [0]*4
-    q_matrix = [fibonacci(n+1), fibonacci(n), fibonacci(n), fibonacci(n-1)]
+    q_matrix = [solved_fibonacci[n+1], solved_fibonacci[n], solved_fibonacci[n], solved_fibonacci[n-1]]
 
     return q_matrix
 pass
 
-def fibonacci(n):
-    """a recursive fibonacci funciton
+def fibonacci(n, solved_fibonacci):
+    """a recursive fibonacci function using dynamic programming
 
     Args:
         n ([integer]): [an integer]
@@ -70,7 +72,11 @@ def fibonacci(n):
     if n == 1 or n == 2:
         return 1
     else:
-        return fibonacci(n-1) + fibonacci(n-2)
+        if(n in solved_fibonacci):
+            return solved_fibonacci[n]
+        else:
+            solved_fibonacci[n] = fibonacci(n-1, solved_fibonacci) + fibonacci(n-2, solved_fibonacci)
+            return solved_fibonacci[n]
 pass
 
 def calculateFirstElementMatrix(q_matrix, matrix):
