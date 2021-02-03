@@ -76,6 +76,7 @@ def createMatrix(base_table, integer_list):
     Returns:
         [list]: [2d matrix]
     """
+
     letters = list(integer_list)
 
     # blocks count is the number of divided blocks in the matrix, paper mentioned it as 'n'
@@ -139,6 +140,7 @@ def calculateDeterminantOfBlocks(blocks):
     Returns:
         [list]: [determinant of each block]
     """
+
     determinants =[0]*len(blocks)
 
     # for each block, calculate the determinant
@@ -158,6 +160,7 @@ def makeFinalMatrix(determinants, blocks):
     Returns:
         [list]: [2d encoded matrix]
     """
+
     # crete and fill the 2d matrix and encode the values in it
     final_matrix = [ [ 0 for i in range(4) ] for j in range(len(blocks)) ]
     for i in range(len(blocks)):

@@ -10,9 +10,10 @@ def do(base_table, matrix):
     Returns:
         [string]: [decoded string]
     """
-    # print(fibonacci(34))
+
     # find the Q-matrix for the problem
     q_matrix = calculateQMatrix(matrix)
+
     # calculate the E1 matrix
     first_element_matrix = calculateFirstElementMatrix(q_matrix, matrix)
 
@@ -69,6 +70,7 @@ def fibonacci(n, solved_fibonacci):
     Returns:
         [integer]: [fibonacci of the given integer]
     """
+
     if n == 1 or n == 2:
         return 1
     else:
@@ -89,6 +91,7 @@ def calculateFirstElementMatrix(q_matrix, matrix):
     Returns:
         [list]: [the E1 matrix]
     """
+
     # create and fill the matrix with zeros, then calculate it using the mentioned formula
     element_matrix = [0]*len(matrix)
     for i in range(len(element_matrix)):
@@ -189,7 +192,7 @@ def reconstructMatrix(base_table, reshaped_blocks):
 pass
 
 def convertNumberMatrixToString(base_table, matrix):
-    """mapp the reconstruced matrix of integers into characters using the base table
+    """map the reconstruced matrix of integers into characters using the base table
 
     Args:
         base_table ([dict]): [maps letters to integers]
@@ -199,7 +202,6 @@ def convertNumberMatrixToString(base_table, matrix):
         [string]: [decoded string]
     """
     # calculate n variable mentioned in the paper
-    # n = math.ceil(math.sqrt(len(matrix))*2)
 
     blocks_count = int(pow(len(matrix)/2, 2))
     if(blocks_count <= 3):
