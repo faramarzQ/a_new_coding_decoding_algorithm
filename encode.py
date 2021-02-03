@@ -41,9 +41,10 @@ def ConvertStringToInteger(base_table, given_string):
     """
 
     # blocks count is the number of divided blocks in the matrix, paper mentioned it as 'n'
-    blocks_count = math.ceil(math.sqrt(len(given_string)))
-    if( blocks_count % 2  == 1):
-        blocks_count += 1
+    temp = math.ceil(math.sqrt(len(given_string)))
+    if( temp % 2  == 1):
+        temp += 1
+    blocks_count = int(pow(temp/2, 2))
 
     # calculating the b variable, mentioned in the paper
     if(blocks_count <= 3):
@@ -78,9 +79,10 @@ def createMatrix(base_table, integer_list):
     letters = list(integer_list)
 
     # blocks count is the number of divided blocks in the matrix, paper mentioned it as 'n'
-    blocks_count = math.ceil(math.sqrt(len(integer_list)))
-    if( blocks_count % 2  == 1):
-        blocks_count += 1
+    item_per_row = math.ceil(math.sqrt(len(integer_list)))
+    if( item_per_row % 2  == 1):
+        item_per_row += 1
+    blocks_count = int(pow(item_per_row/2, 2))
 
     # calculating the b variable, mentioned in the paper
     if(blocks_count <= 3):
@@ -89,12 +91,11 @@ def createMatrix(base_table, integer_list):
         n = blocks_count
 
     # making the 2d matrix, filling it with zeros (mapped value of it), putting list of mapped char in it
-    matrix = [ [ (base_table['0']+n) for i in range(blocks_count) ] for j in range(blocks_count) ]
-    for i in range(blocks_count):
-        for j in range(blocks_count):
+    matrix = [ [ (base_table['0']+n) for i in range(item_per_row) ] for j in range(item_per_row) ]
+    for i in range(item_per_row):
+        for j in range(item_per_row):
             if(len(letters) > 0):
                 letter = letters.pop(0)
-
                 if( letter != ' '):
                     matrix[i][j] = letter
 
@@ -110,17 +111,18 @@ def splitMatrix(matrix):
     Returns:
         [list]: [2d matrix of blocks]
     """
-    blocks_count = pow(int(len(matrix) / 2), 2)
+
+    blocks_count = int(pow(len(matrix)/2, 2))
 
     # creating 2d list of blocks filled with zeros, finding proper block for each item in the matrix
     blocks =[ [ [ 0 for i in range(2) ] for j in range(2) ]  for j in range(blocks_count) ]
+
     for i in range(len(matrix[0])):
         for j in range(len(matrix[0])):
 
             row_of_block = (i - (i % 2)) / 2
             col_of_block = (j - (j % 2)) / 2
             position_of_block = int((row_of_block * math.ceil(math.sqrt(blocks_count)) ) + col_of_block)
-
             block_row = int(i % 2)
             block_col = int(j % 2)
             blocks[position_of_block][block_row][block_col] = matrix[i][j]

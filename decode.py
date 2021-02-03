@@ -193,18 +193,19 @@ def convertNumberMatrixToString(base_table, matrix):
         [string]: [decoded string]
     """
     # calculate n variable mentioned in the paper
-    n = math.ceil(math.sqrt(len(matrix))*2)
+    # n = math.ceil(math.sqrt(len(matrix))*2)
 
-    if(n <= 3):
-        b = 3
+    blocks_count = int(pow(len(matrix)/2, 2))
+    if(blocks_count <= 3):
+        n = 3
     else:
-        b = n
+        n = blocks_count
 
     # declare and map back the integers in matrix to string of characters
     string = ''
     for i in range(len(matrix)):
         for j in range(len(matrix)):
-            string += str(list(base_table.keys())[list(base_table.values()).index( matrix[i][j] - b )])
+            string += str(list(base_table.keys())[list(base_table.values()).index( matrix[i][j] - n )])
 
     # replace the zeros with spaces
     string = string.replace('0', ' ')
